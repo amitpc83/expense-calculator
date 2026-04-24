@@ -1,0 +1,18 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.log
+*.vs/
+
+# Angular / Node
+node_modules/
+dist/
+npm-debug.log
+yarn-error.log
+
+# Environment files
+.env
+.env.*
