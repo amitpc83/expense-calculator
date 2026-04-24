@@ -1,5 +1,6 @@
 
 using Expenses.Api.Data;
+using Expenses.Api.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace Expenses.Api
@@ -21,6 +22,8 @@ namespace Expenses.Api
             {
                 options.UseSqlServer(connectionString);
             });
+
+            builder.Services.AddScoped<ITransactionService, TransactionService>();
 
             var app = builder.Build();
 
