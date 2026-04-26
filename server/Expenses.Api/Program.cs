@@ -25,6 +25,19 @@ namespace Expenses.Api
 
             builder.Services.AddScoped<ITransactionService, TransactionService>();
 
+            var allowedOrigins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>();
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAngular", policy =>
+                {
+                    policy.WithOrigins(allowedOrigins)
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                });
+            });
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -36,8 +49,9 @@ namespace Expenses.Api
 
             app.UseHttpsRedirection();
 
+            app.UseCors("AllowAngular");
             app.UseAuthorization();
-
+           
 
             app.MapControllers();
 
